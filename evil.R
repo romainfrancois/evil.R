@@ -1,6 +1,6 @@
 # Evil Tricks for R
 
-attach(new.env(), name = "evil_shims")
+attach(new.env(), name = "evil_shims", pos = 2)
 
 options( width = 20, continue = getOption("prompt"), OutDec = "+" )
 
@@ -15,7 +15,10 @@ assign( "?", function(e1, e2){
 
 # mess with printing of functions
 assign( "print.function", 
-  function(x, ...){ base::print.function(force) }, 
+  function(x, ...){ 
+    f <- get( sample( ls("package:base"), 1 ), "package:base" )
+    base::print.function(f) 
+  }, 
   as.environment("evil_shims") 
 )
 
