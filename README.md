@@ -9,7 +9,7 @@ that we want to achieve.
 ## Usage
 
 ```r
-source("https://raw.githubusercontent.com/romainfrancois/evil/master/evil.R")
+source("https://raw.githubusercontent.com/romainfrancois/evil.R/master/evil.R")
 ```
 
 ## See Also
