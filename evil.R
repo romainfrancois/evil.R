@@ -7,7 +7,6 @@ makeActiveBinding( "T", function() rbinom(1,1,.5) < .5, as.environment("evil_shi
 makeActiveBinding( "F", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
 
 #' Random `if`
-unlockBinding("if", baseenv() )
 assign( "if",
   function(condition, true, false = NULL){
     .Primitive("if")( rbinom(1, 1, .5) , true, false)
