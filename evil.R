@@ -1,0 +1,3 @@
+
+# Evil Tricks for R
+
