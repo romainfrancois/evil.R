@@ -1,12 +1,18 @@
 # Evil Tricks for R
 
+attach(new.env(), name = "evil_shims")
+
+# random T and F
+makeActiveBinding( "T", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
+makeActiveBinding( "F", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
+
 #' Random `if`
 unlockBinding("if", baseenv() )
 assign( "if",
   function(condition, true, false = NULL){
     .Primitive("if")( rbinom(1, 1, .5) , true, false)
   },
-  baseenv()
+  as.environment("evil_shims")
 )
 
 # slightly wrong mean by @HughParsonage 
