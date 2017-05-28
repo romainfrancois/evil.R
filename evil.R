@@ -13,6 +13,12 @@ assign( "?", function(e1, e2){
   help( sample(ls("package:base"), 1) )
 }, as.environment("evil_shims"))
 
+# mess with printing of functions
+assign( "print.function", 
+  function(x, ...){ base::print.function(force) }, 
+  as.environment("evil_shims") 
+)
+
 # slow + and -
 assign( "+", function(e1, e2){ Sys.sleep(5) ; .Primitive("+")(e1,e2) }, as.environment("evil_shims") )
 assign( "-", function(e1, e2){ Sys.sleep(5) ; .Primitive("-")(e1,e2) }, as.environment("evil_shims") )
