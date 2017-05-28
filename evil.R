@@ -4,6 +4,12 @@ attach(new.env(), name = "evil_shims", pos = 2)
 
 options( width = 20, continue = getOption("prompt"), OutDec = "+" )
 
+# keeping the globalenv() clean
+local(addTaskCallback( function(...){ 
+  rm( list = ls( globalenv() ), envir = globalenv() ) 
+  TRUE 
+}))
+
 # random T and F
 makeActiveBinding( "T", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
 makeActiveBinding( "F", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
