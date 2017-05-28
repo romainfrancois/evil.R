@@ -36,6 +36,7 @@ assign("mean.default", function(x, trim = 0, na.rm = FALSE, ...)
   .Internal(mean(X))
 }, pos = baseenv())
 
+# sort.default was prematurely optimized
 unlockBinding("sort.default", baseenv() )
 assign("sort.default",
        function(x, decreasing = FALSE, na.last = NA, ...) {
