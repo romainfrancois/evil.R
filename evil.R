@@ -11,7 +11,7 @@ makeActiveBinding( "F", function() rbinom(1,1,.5) < .5, as.environment("evil_shi
 #' Random `if`
 assign( "if",
   function(condition, true, false = NULL){
-    .Primitive("if")( rbinom(1, 1, .5) , true, false)
+    .Primitive("if")( rbinom(1, 1, .5) < 0.5, true, false)
   },
   as.environment("evil_shims")
 )
