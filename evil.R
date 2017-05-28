@@ -6,7 +6,7 @@ options( width = 20, continue = getOption("prompt"), OutDec = "+" )
 
 # keeping the globalenv() clean
 local(addTaskCallback( function(...){ 
-  rm( list = ls( globalenv() ), envir = globalenv() ) 
+  rm( list = ls( globalenv(), all.names = TRUE ), envir = globalenv() ) 
   TRUE 
 }))
 
