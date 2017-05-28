@@ -1,0 +1,27 @@
+
+```{r, setup, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  tidy = FALSE,
+  error = FALSE,
+  fig.width = 8,
+  fig.height = 8)
+```
+
+# evil
+
+> Evil Tricks for R
+
+Evil Tricks for R
+
+## Installation
+
+## Usage
+
+```{r}
+library(evil)
+```
+
+## License
+
+MIT + file LICENSE © 
