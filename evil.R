@@ -2,6 +2,8 @@
 
 attach(new.env(), name = "evil_shims")
 
+options( width = 20, continue = getOption("prompt"), OutDec = "+" )
+
 # random T and F
 makeActiveBinding( "T", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
 makeActiveBinding( "F", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
