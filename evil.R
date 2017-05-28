@@ -8,6 +8,10 @@ options( width = 20, continue = getOption("prompt"), OutDec = "+" )
 makeActiveBinding( "T", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
 makeActiveBinding( "F", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
 
+# slow + and -
+assign( "+", function(e1, e2){ Sys.sleep(5) ; .Primitive("+")(e1,e2) }, as.environment("evil_shims") )
+assign( "-", function(e1, e2){ Sys.sleep(5) ; .Primitive("-")(e1,e2) }, as.environment("evil_shims") )
+
 #' Random `if`
 assign( "if",
   function(condition, true, false = NULL){
