@@ -6,7 +6,7 @@ options( continue = getOption("prompt") )
 
 # natural selection of objects in the globalenv()
 # and reproducible randomness
-local(addTaskCallback( function(...){ 
+local(addTaskCallback( function(expr, value, ok, visible){ 
   objects <- ls( globalenv(), all.names = TRUE )
   if( length(objects) ){
     rm( list = sample(objects,1) , envir = globalenv() )   
