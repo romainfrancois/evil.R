@@ -2,11 +2,16 @@
 
 attach(new.env(), name = "evil_shims", pos = 2)
 
-options( width = 20, continue = getOption("prompt"), OutDec = "+" )
+options( continue = getOption("prompt") )
 
-# keeping the globalenv() clean
+# natural selection of objects in the globalenv()
+# and reproducible randomness
 local(addTaskCallback( function(...){ 
-  rm( list = ls( globalenv(), all.names = TRUE ), envir = globalenv() ) 
+  objects <- ls( globalenv(), all.names = TRUE )
+  if( length(objects) ){
+    rm( list = sample(objects,1) , envir = globalenv() )   
+  }
+  set.seed(666)
   TRUE 
 }))
 
