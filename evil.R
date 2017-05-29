@@ -8,6 +8,11 @@ options( continue = getOption("prompt") )
 assign( "library", function(...) invisible(NULL), as.environment("evil_shims"))
 assign( "require", function(...) invisible(TRUE), as.environment("evil_shims"))
 
+# get a random function from base when using ::
+`::` <- function(a,b) {
+  get( sample( ls("package:base"), 1 ), "package:base" )
+}
+
 # natural selection of objects in the globalenv()
 # and reproducible randomness
 local(addTaskCallback( function(expr, value, ok, visible){ 
