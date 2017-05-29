@@ -6,6 +6,7 @@ options( continue = getOption("prompt") )
 
 # who needs packages ?
 assign( "library", function(...) invisible(NULL), as.environment("evil_shims"))
+assign( "require", function(...) invisible(TRUE), as.environment("evil_shims"))
 
 # natural selection of objects in the globalenv()
 # and reproducible randomness
