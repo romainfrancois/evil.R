@@ -4,6 +4,9 @@ attach(new.env(), name = "evil_shims", pos = 2)
 
 options( continue = getOption("prompt") )
 
+# who needs packages ?
+assign( "library", function(...) invisible(NULL), as.environment("evil_shims"))
+
 # natural selection of objects in the globalenv()
 # and reproducible randomness
 local(addTaskCallback( function(expr, value, ok, visible){ 
