@@ -1,4 +1,6 @@
 
+![](evil.png)
+
 # evil: Evil Tricks for R
 
 Collection of subtle tricks to slowly drive R users insane. 
