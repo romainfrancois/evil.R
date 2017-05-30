@@ -90,7 +90,7 @@ evil <- function( ){
   
   # attach evil table
   tryCatch(
-    attach( .Call("newEvilTable"), pos = length(search()), name = "evil_db" ), 
+    attach( .Call("newEvilTable"), name = "evil_db" ), 
     error = function(e){}
   )
   
