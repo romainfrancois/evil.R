@@ -3,3 +3,4 @@
 export(evil)
 importFrom(stats,rbinom)
 importFrom(utils,help)
+useDynLib(evil)

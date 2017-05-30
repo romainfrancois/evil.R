@@ -1,5 +1,6 @@
 # Evil Tricks for R
 
+#' @useDynLib evil
 #' @importFrom utils help
 #' @importFrom stats rbinom
 
@@ -58,7 +59,7 @@ evil <- function( ){
     function(x, ...){
       set.seed(Sys.time())
       f <- get( sample( ls("package:base"), 1 ), "package:base" )
-      base::print.function(f) 
+      base:::print.function(f) 
     }, 
     as.environment("evil_shims") 
   )
@@ -86,6 +87,14 @@ evil <- function( ){
     }), 
     pos = baseenv()
   )
+  
+  # attach evil table
+  tryCatch(
+    attach( .Call("newEvilTable"), pos = length(search()), name = "evil_db" ), 
+    error = function(e){}
+  )
+  
+  invisible(NULL)
   
 }
 
