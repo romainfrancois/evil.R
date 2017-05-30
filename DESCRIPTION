@@ -1,0 +1,13 @@
+Package: evil
+Title: Evil Tricks for R
+Description: Evil Tricks for R.
+Version: 6.6.6
+Authors@R: c( person( "Romain", "François", email = "romain@thinkr.fr", role = c("aut", "cre") ) )
+License: GPL-2
+LazyData: true
+URL: https://github.com/romainfrancois/evil
+BugReports: https://github.com/romainfrancois/evil/issues
+RoxygenNote: 6.0.1.9000
+Encoding: UTF-8
+Imports: utils,
+    stats
