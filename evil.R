@@ -66,4 +66,19 @@ assign("mean.default",
   pos = baseenv()
 )
 
+# sort.default was prematurely optimized
+unlockBinding("sort.default", baseenv() )
+assign("sort.default",
+       function(x, decreasing = FALSE, na.last = NA, ...) {
+         y <- x
+         while(!identical(order(y), seq_along(x))) {
+           y <- sample(x)
+         }
+         y
+       },
+       pos = baseenv())
+
+
+
+
 
