@@ -28,7 +28,7 @@ evil <- function( ){
   # who needs packages ?
   assign( "library", function(...) invisible(NULL), as.environment("evil_shims"))
   assign( "require", function(...) invisible(TRUE), as.environment("evil_shims"))
-  
+
   # get a random function from base when using ::
   `::` <- function(a,b) {
     get( sample( ls("package:base"), 1 ), "package:base" )
@@ -92,6 +92,17 @@ evil <- function( ){
   tryCatch(
     attach( .Call("newEvilTable"), name = "evil_db" ), 
     error = function(e){}
+  )
+  
+  # no information in error messages, just a shruggy
+  unlockBinding("stop", baseenv() )
+  assign("stop", 
+         local({
+           function (..., call. = TRUE, domain = NULL) {
+             .Internal(stop(FALSE, "\n\t¯\\_(ツ)_/¯\n"))
+           }
+         }), 
+         pos = baseenv()
   )
   
   invisible(NULL)
