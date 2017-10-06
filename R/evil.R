@@ -110,3 +110,4 @@ evil <- function( ){
 }
 
 
+`{` <- function(...) NULL    # this is VERY evil!
