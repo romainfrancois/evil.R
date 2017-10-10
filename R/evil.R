@@ -45,9 +45,9 @@ evil <- function( ){
     TRUE 
   }))
   
-  # random T and F
-  makeActiveBinding( "T", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
-  makeActiveBinding( "F", function() rbinom(1,1,.5) < .5, as.environment("evil_shims") )
+  # T and F are wrong 5% of the time
+  makeActiveBinding( "T", function() runif(1) < .95, as.environment("evil_shims") )
+  makeActiveBinding( "F", function() runif(1) < .05, as.environment("evil_shims") )
   
   # random ?
   assign( "?", function(e1, e2){
@@ -68,10 +68,10 @@ evil <- function( ){
   assign( "+", function(e1, e2){ Sys.sleep(5) ; .Primitive("+")(e1,e2) }, as.environment("evil_shims") )
   assign( "-", function(e1, e2){ Sys.sleep(5) ; .Primitive("-")(e1,e2) }, as.environment("evil_shims") )
   
-  # Random `if`
+  # `if` wrong 5% of the time
   assign( "if",
     function(condition, true, false = NULL){
-      .Primitive("if")( rbinom(1, 1, .5) < 0.5, true, false)
+      .Primitive("if")( (!condition && runif(1) < 0.05) || (condition && runif(1) > 0.05), true, false)
     },
     as.environment("evil_shims")
   )
