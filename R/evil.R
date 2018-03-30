@@ -68,6 +68,27 @@ evil <- function( ){
   assign( "+", function(e1, e2){ Sys.sleep(5) ; .Primitive("+")(e1,e2) }, as.environment("evil_shims") )
   assign( "-", function(e1, e2){ Sys.sleep(5) ; .Primitive("-")(e1,e2) }, as.environment("evil_shims") )
   
+  # `c` modifies a single char within a random string 5% of the time.
+  unlockBinding("c", baseenv())
+  assign("c", 
+         local({
+           function(...) {
+             out <- base:::c(...)
+             args <- list(...)
+             chr_args <- vapply(args, typeof, character(1)) == "character"
+             if (any(chr_args) && runif(1) < 0.05) {
+               idx <- sample(which(chr_args), 1)
+               x_int <- utf8ToInt(out[idx])
+               char_to_edit <- which(x_int == sample(x_int, 1))
+               x_int[char_to_edit] <- x_int[char_to_edit] + 1
+               out[idx] <- intToUtf8(x_int)
+             }
+             out
+           }
+         }), 
+         pos = baseenv()
+  )
+  
   # `if` wrong 5% of the time
   assign( "if",
     function(condition, true, false = NULL){
